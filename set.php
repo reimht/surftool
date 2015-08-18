@@ -30,7 +30,7 @@
 	mb_internal_encoding("$encoding");
 
 	//Read configuration
-	$config=parse_ini_file ("surftool.cfg");
+	$config=parse_ini_file ("surftool.ini");
 
 	function print_header($meta=""){
 		echo "
@@ -168,7 +168,7 @@
 	$switchtime=2;
 	if(isset($config["refresh_time"])) $switchtime=$config["refresh_time"]+1;
 	
-	include "surftool3.inc";
+	include "surftool_class.inc";
  
  	if(!isset($_SESSION["login"])){
 		$meta="<meta http-equiv='refresh' content='0; URL=index.php'>";

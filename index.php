@@ -28,7 +28,7 @@
 
 	session_start();
 	//Read configuration
-	$config=parse_ini_file ("surftool.cfg");		
+	$config=parse_ini_file ("surftool.ini");		
 
 
 	if(isset($_POST["logout"])){

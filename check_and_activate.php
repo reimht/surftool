@@ -27,7 +27,7 @@
 */
 
 	//Read configuration
-	$config=parse_ini_file ("surftool.cfg");
+	$config=parse_ini_file ("surftool.ini");
 
 	$debug=0;
 	$max_execution_time=5;
@@ -49,7 +49,7 @@
 		echo "Warning max_execution_time is ".ini_get('max_execution_time')."s should be ".$max_execution_time."s\n";
 	}
 
-	include "surftool3.inc";
+	include "surftool_class.inc";
 
 	$sgcommands= new commandReader($commandpath);
 
