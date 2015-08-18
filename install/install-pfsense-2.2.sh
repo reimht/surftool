@@ -1,47 +1,20 @@
 #!/bin/sh
 
-INIFILE='/usr/local/www/surftool/surftool.ini'
-STDAEMON='/usr/local/share/surftool/surftooldaemon.sh'
-LOGFILE='/var/log/surftool.log'
+echo "copy web page"
+mkdir -p /usr/local/www/surftool/
+mv /tmp/surftool-master/*.php /usr/local/www/surftool/
+mv /tmp/surftool-master/*.ini /usr/local/www/surftool/
+mv /tmp/surftool-master/*.inc /usr/local/www/surftool/
 
+echo "copy daemon"
+mkdir -p /usr/local/share/surftool/
+mv /tmp/surftool-master/surftooldaemon.sh /usr/local/share/surftool/
+chmod +x /usr/local/share/surftool/surftooldaemon.sh
 
-rc_start() {
+echo "copy init.d script"
+cp /tmp/surftool-master/init.d/surftool-pfsense.sh /usr/local/etc/rc.d/surftool.sh
+chmod +x /usr/local/etc/rc.d/surftool.sh
 
-        if ! [ -f "$STDAEMON" ]; then
-                echo "Error surftooldaemon executable: file '$STDAEMON' does not exist "
-        fi
-
-        if ! [ -f "$INIFILE" ]; then
-                echo "Error surftooldaemon config file '$INIFILE' does not exist "
-        fi
-
-        #start daemon
-        $STDAEMON start $INIFILE >> $LOGFILE 2>&1 &
-
-
-}
-
-rc_stop() {
-        $STDAEMON stop $INIFILE
-}
-
-rc_status() {
-        $STDAEMON status $INIFILE
-}
-
-case $1 in
-        start)
-                rc_start
-                ;;
-        stop)
-                rc_stop
-                ;;
-        status)
-                rc_status
-                ;;
-        restart)
-                rc_stop
-                rc_start
-                ;;
-esac
+echo "start service"
+service surftool.sh start
 
