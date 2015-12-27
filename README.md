@@ -7,4 +7,8 @@ We made for every classroom a acl. And set for every classroom specific acls (bl
 
 The surf tool consists of two modules.
 - The Web GUI reads the squidguard.conf file an writes the user commands to a separate file
-- The "surftooldeamon" looks every x seconds for new command files and activates the changes
+- The "surftooldaemon" looks every x seconds for new command files and activates the changes
+
+Why is there a extra daemon?
+
+Our lessons start at 7:50am clock. Between 07:50 am and 07:55 am we have 40 changes (mostly switching online) (peak). That’s why we need to synchronize writing to the squidquard configurations files.
